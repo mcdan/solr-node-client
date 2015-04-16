@@ -1,0 +1,6 @@
+{
+  "client": {
+    "core": "nodetest",
+    "zkHostString": "soco-hipchat.corp.adobe.com:2181"
+  }
+}
