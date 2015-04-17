@@ -1,0 +1,25 @@
+{
+    "$(collectionname)": {
+        "autoAddReplicas": "false",
+        "maxShardsPerNode": "1",
+        "replicationFactor": "1",
+        "router": {
+            "name": "compositeId"
+        },
+        "shards": {
+            "shard1": {
+                "range": "80000000-7fffffff",
+                "replicas": {
+                    "core_node1": {
+                        "base_url": "http://$(server):$(port)/solr",
+                        "core": "$(collectionname)_shard1_replica1",
+                        "leader": "true",
+                        "node_name": "$(server):$(port)_solr",
+                        "state": "active"
+                    }
+                },
+                "state": "active"
+            }
+        }
+    }
+}
