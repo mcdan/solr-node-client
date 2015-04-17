@@ -9,8 +9,10 @@ var mocha = require('mocha'),
 	solr = require( libPath + '/solr'),
 	sassert = require('./sassert');
 
+var argv = require('minimist')(process.argv.slice(2));
 // Test suite
-var config = figc(__dirname + '/cloud-config.json');
+var configPath = argv.configPath || 'config.json';
+var config = figc(__dirname + '/' + configPath);
 var client = solr.createClient(config.client);
 var basePath = [config.client.path, config.client.core].join('/').replace(/\/$/,"");
 

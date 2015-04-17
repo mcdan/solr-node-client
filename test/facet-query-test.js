@@ -15,8 +15,10 @@ var mocha = require('mocha'),
 // http://wiki.apache.org/solr/SimpleFacetParameters#Retrieve_docs_with_facets_missing
 // and http://wiki.apache.org/solr/HierarchicalFaceting
 
+var argv = require('minimist')(process.argv.slice(2));
 // Test suite
-var config = figc(__dirname + '/config.json');
+var configPath = argv.configPath || 'config.json';
+var config = figc(__dirname + '/' + configPath);
 var client = solr.createClient(config.client);
 var basePath = [config.client.path, config.client.core].join('/').replace(/\/$/,"");
 

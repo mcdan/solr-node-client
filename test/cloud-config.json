@@ -1,6 +1,7 @@
 {
   "client": {
     "core": "nodetest",
-    "zkHostString": "soco-hipchat.corp.adobe.com:2181"
+    "zkHostString": "soco-hipchat.corp.adobe.com:2181",
+    "path": "/solr"
   }
 }

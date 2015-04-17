@@ -13,8 +13,10 @@ var mocha = require('mocha'),
     sassert = require('./sassert'),
     BigNumber = require('bignumber.js');
 
+var argv = require('minimist')(process.argv.slice(2));
 // Test suite
-var config = figc(__dirname + '/config.json');
+var configPath = argv.configPath || 'config.json';
+var config = figc(__dirname + '/' + configPath);
 var client = solr.createClient(config.client);
 var basePath = [config.client.path, config.client.core].join('/').replace(/\/$/,'');
 
