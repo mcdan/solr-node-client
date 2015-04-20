@@ -11,8 +11,10 @@ var mocha = require('mocha'),
 	sassert = require('./sassert'),
 	versionUtils = require('./../lib/utils/version');
 
+var argv = require('minimist')(process.argv.slice(2));
 // Test suite
-var config = figc(__dirname + '/config.json');
+var configPath = argv.configPath || 'config.json';
+var config = figc(__dirname + '/' + configPath);
 var client = solr.createClient(config.client);
 var basePath = [config.client.path, config.client.core].join('/').replace(/\/$/,"");
 
@@ -21,6 +23,7 @@ describe('Client',function(){
 		it('should prepare the commit',function(done){
 			var request = client.prepareCommit(function(err,data){
 				sassert.ok(err,data);
+// This is likely broken in solr cloud
 				if(client.options.solrVersion && versionUtils.version(client.options.solrVersion) >= versionUtils.Solr4_0) {
 					assert.equal(request.path, basePath + '/update?prepareCommit=true&wt=json');
 				} else {
